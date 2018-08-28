@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cdds.iml" filepath="$PROJECT_DIR$/cdds.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_config/cdds_config.iml" filepath="$PROJECT_DIR$/cdds_config/cdds_config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_feign/cdds_feign.iml" filepath="$PROJECT_DIR$/cdds_feign/cdds_feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_manager/cdds_manager.iml" filepath="$PROJECT_DIR$/cdds_manager/cdds_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_order/cdds_order.iml" filepath="$PROJECT_DIR$/cdds_order/cdds_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_pojo/cdds_pojo.iml" filepath="$PROJECT_DIR$/cdds_pojo/cdds_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_product/cdds_product.iml" filepath="$PROJECT_DIR$/cdds_product/cdds_product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdds_schedule/cdds_schedule.iml" filepath="$PROJECT_DIR$/cdds_schedule/cdds_schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common_util/common_util.iml" filepath="$PROJECT_DIR$/common_util/common_util.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdkj.manager.system.dao.SysAccountMapper">
+    <resultMap id="BaseResultMap" type="com.cdkj.model.system.pojo.SysAccount">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SYS_ACCOUNT" property="sysAccount" jdbcType="VARCHAR"/>
+        <result column="COMPANY" property="company" jdbcType="VARCHAR"/>
+        <result column="INDUSTRYNO" property="industryno" jdbcType="VARCHAR"/>
+        <result column="CORPORATE" property="corporate" jdbcType="VARCHAR"/>
+        <result column="TAXNO" property="taxno" jdbcType="VARCHAR"/>
+        <result column="WEB_ADDRESS" property="webAddress" jdbcType="VARCHAR"/>
+        <result column="COMP_TEL" property="compTel" jdbcType="VARCHAR"/>
+        <result column="COMP_FAX" property="compFax" jdbcType="VARCHAR"/>
+        <result column="COMP_TYPE" property="compType" jdbcType="VARCHAR"/>
+        <result column="COMP_BRIEF" property="compBrief" jdbcType="VARCHAR"/>
+        <result column="COMP_QRCODE" property="compQrcode" jdbcType="VARCHAR"/>
+        <result column="POSTAL_CODE" property="postalCode" jdbcType="VARCHAR"/>
+        <result column="REG_DT" property="regDt" jdbcType="VARCHAR"/>
+        <result column="LOGIN_DT" property="loginDt" jdbcType="VARCHAR"/>
+        <result column="EFFECT_DT" property="effectDt" jdbcType="VARCHAR"/>
+        <result column="LOGO" property="logo" jdbcType="VARCHAR"/>
+        <result column="AGENT_COMP" property="agentComp" jdbcType="VARCHAR"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"/>
+        <result column="CONTACT_TEL" property="contactTel" jdbcType="VARCHAR"/>
+        <result column="BUSI_SCOPE" property="busiScope" jdbcType="VARCHAR"/>
+        <result column="SEV_AREA" property="sevArea" jdbcType="VARCHAR"/>
+        <result column="PARENT_COMP" property="parentComp" jdbcType="VARCHAR"/>
+        <result column="COUNTRY" property="country" jdbcType="VARCHAR"/>
+        <result column="PROVINCE" property="province" jdbcType="VARCHAR"/>
+        <result column="CITY" property="city" jdbcType="VARCHAR"/>
+        <result column="DISTRICT" property="district" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR"/>
+        <result column="BANK_ADDRESS" property="bankAddress" jdbcType="VARCHAR"/>
+        <result column="BANK_NUMBER" property="bankNumber" jdbcType="VARCHAR"/>
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR"/>
+        <result column="IS_PROMOTE" property="isPromote" jdbcType="INTEGER"/>
+        <result column="ENABLED" property="enabled" jdbcType="INTEGER"/>
+        <result column="VERSION" property="version" jdbcType="INTEGER"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="VARCHAR"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, SYS_ACCOUNT, COMPANY, INDUSTRYNO, CORPORATE, TAXNO, WEB_ADDRESS, COMP_TEL, COMP_FAX, 
+    COMP_TYPE, COMP_BRIEF, COMP_QRCODE, POSTAL_CODE, REG_DT, LOGIN_DT, EFFECT_DT, LOGO, 
+    AGENT_COMP, CONTACT, CONTACT_TEL, BUSI_SCOPE, SEV_AREA, PARENT_COMP, COUNTRY, PROVINCE, 
+    CITY, DISTRICT, ADDRESS, BANK_NAME, BANK_ADDRESS, BANK_NUMBER, REAL_NAME, IS_PROMOTE, 
+    ENABLED, VERSION, STATUS, REMARK, MEMO, CREATE_BY, CREATE_DT, UPDATE_BY, UPDATE_DT
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_account
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_account
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.cdkj.model.system.pojo.SysAccount">
+    insert into sys_account (ID, SYS_ACCOUNT, COMPANY, 
+      INDUSTRYNO, CORPORATE, TAXNO, 
+      WEB_ADDRESS, COMP_TEL, COMP_FAX, 
+      COMP_TYPE, COMP_BRIEF, COMP_QRCODE, 
+      POSTAL_CODE, REG_DT, LOGIN_DT, 
+      EFFECT_DT, LOGO, AGENT_COMP, 
+      CONTACT, CONTACT_TEL, BUSI_SCOPE, 
+      SEV_AREA, PARENT_COMP, COUNTRY, 
+      PROVINCE, CITY, DISTRICT, 
+      ADDRESS, BANK_NAME, BANK_ADDRESS, 
+      BANK_NUMBER, REAL_NAME, IS_PROMOTE, 
+      ENABLED, VERSION, STATUS, 
+      REMARK, MEMO, CREATE_BY, 
+      CREATE_DT, UPDATE_BY, UPDATE_DT
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sysAccount,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{industryno,jdbcType=VARCHAR}, #{corporate,jdbcType=VARCHAR}, #{taxno,jdbcType=VARCHAR}, 
+      #{webAddress,jdbcType=VARCHAR}, #{compTel,jdbcType=VARCHAR}, #{compFax,jdbcType=VARCHAR}, 
+      #{compType,jdbcType=VARCHAR}, #{compBrief,jdbcType=VARCHAR}, #{compQrcode,jdbcType=VARCHAR}, 
+      #{postalCode,jdbcType=VARCHAR}, #{regDt,jdbcType=VARCHAR}, #{loginDt,jdbcType=VARCHAR}, 
+      #{effectDt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{agentComp,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{contactTel,jdbcType=VARCHAR}, #{busiScope,jdbcType=VARCHAR}, 
+      #{sevArea,jdbcType=VARCHAR}, #{parentComp,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, 
+      #{bankNumber,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{isPromote,jdbcType=INTEGER}, 
+      #{enabled,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDt,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{updateDt,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.cdkj.model.system.pojo.SysAccount">
+        insert into sys_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT,
+            </if>
+            <if test="company != null">
+                COMPANY,
+            </if>
+            <if test="industryno != null">
+                INDUSTRYNO,
+            </if>
+            <if test="corporate != null">
+                CORPORATE,
+            </if>
+            <if test="taxno != null">
+                TAXNO,
+            </if>
+            <if test="webAddress != null">
+                WEB_ADDRESS,
+            </if>
+            <if test="compTel != null">
+                COMP_TEL,
+            </if>
+            <if test="compFax != null">
+                COMP_FAX,
+            </if>
+            <if test="compType != null">
+                COMP_TYPE,
+            </if>
+            <if test="compBrief != null">
+                COMP_BRIEF,
+            </if>
+            <if test="compQrcode != null">
+                COMP_QRCODE,
+            </if>
+            <if test="postalCode != null">
+                POSTAL_CODE,
+            </if>
+            <if test="regDt != null">
+                REG_DT,
+            </if>
+            <if test="loginDt != null">
+                LOGIN_DT,
+            </if>
+            <if test="effectDt != null">
+                EFFECT_DT,
+            </if>
+            <if test="logo != null">
+                LOGO,
+            </if>
+            <if test="agentComp != null">
+                AGENT_COMP,
+            </if>
+            <if test="contact != null">
+                CONTACT,
+            </if>
+            <if test="contactTel != null">
+                CONTACT_TEL,
+            </if>
+            <if test="busiScope != null">
+                BUSI_SCOPE,
+            </if>
+            <if test="sevArea != null">
+                SEV_AREA,
+            </if>
+            <if test="parentComp != null">
+                PARENT_COMP,
+            </if>
+            <if test="country != null">
+                COUNTRY,
+            </if>
+            <if test="province != null">
+                PROVINCE,
+            </if>
+            <if test="city != null">
+                CITY,
+            </if>
+            <if test="district != null">
+                DISTRICT,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="bankName != null">
+                BANK_NAME,
+            </if>
+            <if test="bankAddress != null">
+                BANK_ADDRESS,
+            </if>
+            <if test="bankNumber != null">
+                BANK_NUMBER,
+            </if>
+            <if test="realName != null">
+                REAL_NAME,
+            </if>
+            <if test="isPromote != null">
+                IS_PROMOTE,
+            </if>
+            <if test="enabled != null">
+                ENABLED,
+            </if>
+            <if test="version != null">
+                VERSION,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="createBy != null">
+                CREATE_BY,
+            </if>
+            <if test="createDt != null">
+                CREATE_DT,
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY,
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sysAccount != null">
+                #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="industryno != null">
+                #{industryno,jdbcType=VARCHAR},
+            </if>
+            <if test="corporate != null">
+                #{corporate,jdbcType=VARCHAR},
+            </if>
+            <if test="taxno != null">
+                #{taxno,jdbcType=VARCHAR},
+            </if>
+            <if test="webAddress != null">
+                #{webAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="compTel != null">
+                #{compTel,jdbcType=VARCHAR},
+            </if>
+            <if test="compFax != null">
+                #{compFax,jdbcType=VARCHAR},
+            </if>
+            <if test="compType != null">
+                #{compType,jdbcType=VARCHAR},
+            </if>
+            <if test="compBrief != null">
+                #{compBrief,jdbcType=VARCHAR},
+            </if>
+            <if test="compQrcode != null">
+                #{compQrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="postalCode != null">
+                #{postalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="regDt != null">
+                #{regDt,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDt != null">
+                #{loginDt,jdbcType=VARCHAR},
+            </if>
+            <if test="effectDt != null">
+                #{effectDt,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="agentComp != null">
+                #{agentComp,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null">
+                #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="contactTel != null">
+                #{contactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="busiScope != null">
+                #{busiScope,jdbcType=VARCHAR},
+            </if>
+            <if test="sevArea != null">
+                #{sevArea,jdbcType=VARCHAR},
+            </if>
+            <if test="parentComp != null">
+                #{parentComp,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null">
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAddress != null">
+                #{bankAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNumber != null">
+                #{bankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="isPromote != null">
+                #{isPromote,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysAccount">
+        update sys_account
+        <set>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                COMPANY = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="industryno != null">
+                INDUSTRYNO = #{industryno,jdbcType=VARCHAR},
+            </if>
+            <if test="corporate != null">
+                CORPORATE = #{corporate,jdbcType=VARCHAR},
+            </if>
+            <if test="taxno != null">
+                TAXNO = #{taxno,jdbcType=VARCHAR},
+            </if>
+            <if test="webAddress != null">
+                WEB_ADDRESS = #{webAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="compTel != null">
+                COMP_TEL = #{compTel,jdbcType=VARCHAR},
+            </if>
+            <if test="compFax != null">
+                COMP_FAX = #{compFax,jdbcType=VARCHAR},
+            </if>
+            <if test="compType != null">
+                COMP_TYPE = #{compType,jdbcType=VARCHAR},
+            </if>
+            <if test="compBrief != null">
+                COMP_BRIEF = #{compBrief,jdbcType=VARCHAR},
+            </if>
+            <if test="compQrcode != null">
+                COMP_QRCODE = #{compQrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="postalCode != null">
+                POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="regDt != null">
+                REG_DT = #{regDt,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDt != null">
+                LOGIN_DT = #{loginDt,jdbcType=VARCHAR},
+            </if>
+            <if test="effectDt != null">
+                EFFECT_DT = #{effectDt,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                LOGO = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="agentComp != null">
+                AGENT_COMP = #{agentComp,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null">
+                CONTACT = #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="contactTel != null">
+                CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="busiScope != null">
+                BUSI_SCOPE = #{busiScope,jdbcType=VARCHAR},
+            </if>
+            <if test="sevArea != null">
+                SEV_AREA = #{sevArea,jdbcType=VARCHAR},
+            </if>
+            <if test="parentComp != null">
+                PARENT_COMP = #{parentComp,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                COUNTRY = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                PROVINCE = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                CITY = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null">
+                DISTRICT = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                BANK_NAME = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAddress != null">
+                BANK_ADDRESS = #{bankAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNumber != null">
+                BANK_NUMBER = #{bankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                REAL_NAME = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="isPromote != null">
+                IS_PROMOTE = #{isPromote,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                ENABLED = #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cdkj.model.system.pojo.SysAccount">
+    update sys_account
+    set SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      COMPANY = #{company,jdbcType=VARCHAR},
+      INDUSTRYNO = #{industryno,jdbcType=VARCHAR},
+      CORPORATE = #{corporate,jdbcType=VARCHAR},
+      TAXNO = #{taxno,jdbcType=VARCHAR},
+      WEB_ADDRESS = #{webAddress,jdbcType=VARCHAR},
+      COMP_TEL = #{compTel,jdbcType=VARCHAR},
+      COMP_FAX = #{compFax,jdbcType=VARCHAR},
+      COMP_TYPE = #{compType,jdbcType=VARCHAR},
+      COMP_BRIEF = #{compBrief,jdbcType=VARCHAR},
+      COMP_QRCODE = #{compQrcode,jdbcType=VARCHAR},
+      POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+      REG_DT = #{regDt,jdbcType=VARCHAR},
+      LOGIN_DT = #{loginDt,jdbcType=VARCHAR},
+      EFFECT_DT = #{effectDt,jdbcType=VARCHAR},
+      LOGO = #{logo,jdbcType=VARCHAR},
+      AGENT_COMP = #{agentComp,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      BUSI_SCOPE = #{busiScope,jdbcType=VARCHAR},
+      SEV_AREA = #{sevArea,jdbcType=VARCHAR},
+      PARENT_COMP = #{parentComp,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      BANK_ADDRESS = #{bankAddress,jdbcType=VARCHAR},
+      BANK_NUMBER = #{bankNumber,jdbcType=VARCHAR},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      IS_PROMOTE = #{isPromote,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      VERSION = #{version,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DT = #{createDt,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="listByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysAccount" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_account
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="sysAccount != null and sysAccount!=''">
+                and SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR}
+            </if>
+            <if test="enabled != null">
+                and ENABLED = #{enabled,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_account
+        WHERE ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectBySysAccount" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_account
+        WHERE SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR}
+        AND ENABLED=1
+    </select>
+
+    <update id="deleteLogic">
+        update sys_account
+        set ENABLED = 0
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_account
+        WHERE
+        ENABLED=1
+        <if test="params.sysAccount!=null and params.sysAccount!=''">
+            AND SYS_ACCOUNT = #{params.sysAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startDate!=null and params.startDate!=''">
+            <![CDATA[
+              AND CREATE_DT >= #{params.startDate,jdbcType=VARCHAR}
+            ]]>
+        </if>
+        <if test="params.endDate!=null and params.endDate!=''">
+            <![CDATA[
+              AND CREATE_DT <= #{params.endDate,jdbcType=VARCHAR}
+            ]]>
+        </if>
+        order by CREATE_DT desc
+    </select>
+</mapper>

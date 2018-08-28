@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include::header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5></h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="dictForm">
+                        <input id="sysAccount" name="sysAccount" type="hidden" th:value="${sysAccount}">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称：</label>
+                            <div class="col-sm-8">
+                                <input id="groupName" name="groupName" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span>代码组：</label>
+                            <div class="col-sm-8">
+                                <input id="groupCode" name="groupCode" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span>代码键：</label>
+                            <div class="col-sm-8">
+                                <input id="paramKey" name="paramKey" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span>代码值：</label>
+                            <div class="col-sm-8">
+                                <input id="paramValue" name="paramValue" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <input id="remark" name="remark" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="col-sm-3 control-label">基础字典：</label>
+                            <div class="col-sm-8">
+                                <input id="ztreeValue" name="remark" class="ztreeValue" class="form-control"
+                                       type="text" aria-expanded="false" data-toggle="dropdown" readonly>
+
+                                <div class="row pre-scrollable dropdown-menu" style="width: 94%;margin-right: 15px;height: 270px;">
+                                    <ul class="list-group">
+                                        <div id="ztree" class="ztree"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/sys/dict/add.js"></script>
+<script type="text/javascript" src="/js/plugins/ztree/jquery.ztree.all.min.js"></script>
+</body>
+
+</html>

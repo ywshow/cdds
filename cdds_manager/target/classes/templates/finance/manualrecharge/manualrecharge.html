@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      lang="zh_CN">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-body">
+                <div class="form-inline form-group">
+                    <label for="payType">支付类型:</label>
+                    <select type="select" class="form-control" name="payType" id="payType">
+                        <option value="">全部</option>
+                        <option th:each="entry : ${payType}" th:text="${entry.value}"
+                                th:value="${entry.key}"></option>
+
+                    </select>
+                    <label for="transferStatus">到账状态:</label>
+                    <select type="select" class="form-control" name="transferStatus" id="transferStatus">
+                        <option value="">全部</option>
+                        <option th:each="entry : ${transferStatus}" th:text="${entry.value}"
+                                th:value="${entry.key}"></option>
+                    </select>
+                    <label for="checkResult">审核结果:</label>
+                    <select type="select" class="form-control " name="checkResult" id="checkResult">
+                        <option value="">全部</option>
+                        <option th:each="entry : ${checkResult}" th:text="${entry.value}"
+                                th:value="${entry.key}"></option>
+                    </select>
+                    <div class="form-group ">
+                        <input type="text" class="form-control" name="conNo" id="conNo"
+                               placeholder="会员号"/></div>
+                    <button class="btn btn-success" onclick="resetQueryConditions()">重置</button>
+                    <button class="btn btn-success" onclick="query()">查询</button>
+                </div>
+
+
+                <div class="form-inline">
+                    <button shiro:hasPermission="finance:manualrecharge:add" type="button"
+                            class="btn  btn-primary" onclick="add()">
+                        <i class="fa fa-plus " aria-hidden="true"></i>添加
+                    </button>
+                    <button shiro:hasPermission="finance:manualrecharge:edit" type="button"
+                            class="btn  btn-danger" onclick="audit()">
+                        <i class="fa fa-check-square hidden" aria-hidden="true"></i>审核
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" id="id" name="id"> <!--选中行的id，actualAmount值-->
+            <input type="hidden" id="actualAmount" name="actualAmount">
+            <input type="hidden" id="conNo_audit" name="conNo_audit">
+            <input type="hidden" id="conName_audit" name="conName_audit">
+            <table id="exampleTable" data-mobile-responsive="true">
+            </table>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="finance:manualrecharge:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="finance:manualrecharge:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/finance/manualrecharge/manualrecharge.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cdds_config" />
+        <module name="cdds_feign" />
+        <module name="cdds_manager" />
+        <module name="cdds_order" />
+        <module name="cdds_pojo" />
+        <module name="cdds_product" />
+        <module name="cdds_schedule" />
+        <module name="common_util" />
+        <module name="config" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cdds" target="1.8" />
+      <module name="cdds_config" target="1.8" />
+      <module name="cdds_feign" target="1.8" />
+      <module name="cdds_manager" target="1.8" />
+      <module name="cdds_order" target="1.8" />
+      <module name="cdds_pojo" target="1.8" />
+      <module name="cdds_product" target="1.8" />
+      <module name="cdds_schedule" target="1.8" />
+      <module name="common_util" target="1.8" />
+      <module name="config" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

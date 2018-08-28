@@ -1,0 +1,49 @@
+server:
+  port: 8102
+  tomcat:
+    uri-encoding: utf-8
+spring:
+  application:
+    name: service-order
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    #配置环境设置
+    active: dev
+  http:
+    #文件上传设置
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+mybatis:
+  mapper-locations: classpath:mapper/order/**/*.xml
+  type-aliases-package: com.cdkj.model.**.pojo
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      min-request-size: 2048
+      mime-types: text/xml,application/xml,application/json
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        sleepWindowInMilliseconds: 10000
+        forceClosed: true
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
+ribbon:
+#请求处理的超时时间
+  ReadTimeout: 10000
+  #请求连接的超时时间
+  ConnectTimeout: 60000
+
+logging:
+  level:
+    project:
+      user:
+        UserClient: DEBUG

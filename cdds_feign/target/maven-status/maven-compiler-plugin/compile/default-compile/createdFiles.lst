@@ -1,0 +1,7 @@
+com\cdkj\feign\order\hystric\OrderFeignHystric.class
+com\cdkj\feign\product\hystric\ProductFeignHystric$1.class
+com\cdkj\feign\product\api\ProductFeignService.class
+com\cdkj\feign\order\api\OrderFeignService.class
+com\cdkj\feign\order\hystric\OrderFeignHystric$1.class
+com\cdkj\feign\config\FeiginConfiguration.class
+com\cdkj\feign\product\hystric\ProductFeignHystric.class

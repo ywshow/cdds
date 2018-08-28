@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdkj.manager.system.dao.SysDeptMapper">
+    <resultMap id="BaseResultMap" type="com.cdkj.model.system.pojo.SysDept">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SYS_ACCOUNT" property="sysAccount" jdbcType="VARCHAR"/>
+        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+        <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="SORT_NUMBER" property="sortNumber" jdbcType="INTEGER"/>
+        <result column="ENABLED" property="enabled" jdbcType="INTEGER"/>
+        <result column="VERSION" property="version" jdbcType="INTEGER"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="VARCHAR"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, SYS_ACCOUNT, PARENT_ID, DEPT_NAME, DEPT_CODE, SORT_NUMBER, ENABLED, VERSION, 
+    STATUS, REMARK, MEMO, CREATE_BY, CREATE_DT, UPDATE_BY, UPDATE_DT
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_dept
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.cdkj.model.system.pojo.SysDept">
+    insert into sys_dept (ID, SYS_ACCOUNT, PARENT_ID, 
+      DEPT_NAME, DEPT_CODE, SORT_NUMBER, 
+      ENABLED, VERSION, STATUS, 
+      REMARK, MEMO, CREATE_BY, 
+      CREATE_DT, UPDATE_BY, UPDATE_DT
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sysAccount,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{deptName,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{sortNumber,jdbcType=INTEGER}, 
+      #{enabled,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDt,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{updateDt,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.cdkj.model.system.pojo.SysDept">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT,
+            </if>
+            <if test="parentId != null">
+                PARENT_ID,
+            </if>
+            <if test="deptName != null">
+                DEPT_NAME,
+            </if>
+            <if test="deptCode != null">
+                DEPT_CODE,
+            </if>
+            <if test="sortNumber != null">
+                SORT_NUMBER,
+            </if>
+            <if test="enabled != null">
+                ENABLED,
+            </if>
+            <if test="version != null">
+                VERSION,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="createBy != null">
+                CREATE_BY,
+            </if>
+            <if test="createDt != null">
+                CREATE_DT,
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY,
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sysAccount != null">
+                #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptName != null">
+                #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptCode != null">
+                #{deptCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNumber != null">
+                #{sortNumber,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysDept">
+        update sys_dept
+        <set>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                PARENT_ID = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptName != null">
+                DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptCode != null">
+                DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNumber != null">
+                SORT_NUMBER = #{sortNumber,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                ENABLED = #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cdkj.model.system.pojo.SysDept">
+    update sys_dept
+    set SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      SORT_NUMBER = #{sortNumber,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      VERSION = #{version,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DT = #{createDt,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="listByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysDept" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_dept
+        <where>
+            <if test="id != null">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="sysAccount != null">
+                and SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR}
+            </if>
+            <if test="enabled != null">
+                and ENABLED = #{enabled,jdbcType=INTEGER}
+            </if>
+            <if test="deptName != null">
+                and DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+            </if>
+            <if test="deptCode != null">
+                and DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and PARENT_ID = #{parentId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+      SELECT
+            a.ID, a.SYS_ACCOUNT, a.PARENT_ID, a.DEPT_NAME, a.DEPT_CODE, a.SORT_NUMBER, a.ENABLED, a.VERSION,
+    a.STATUS, a.REMARK, a.MEMO, a.CREATE_BY, a.CREATE_DT, a.UPDATE_BY, a.UPDATE_DT
+
+        FROM sys_dept a LEFT JOIN sys_user_dept b ON a.id=b.dept_id WHERE
+       a.enabled=1
+         and user_id=#{userId}
+    </select>
+
+    <select id="selectByParentId" resultMap="BaseResultMap" parameterType="string">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_dept
+        WHERE ENABLED=1
+        and PARENT_ID = #{parentId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

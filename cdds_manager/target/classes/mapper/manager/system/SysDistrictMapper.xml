@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.manager.system.dao.SysDistrictMapper">
+  <resultMap id="BaseResultMap" type="com.cdkj.model.system.pojo.SysDistrict">
+
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SYS_ACCOUNT" jdbcType="VARCHAR" property="sysAccount" />
+    <result column="DC_ID" jdbcType="INTEGER" property="dcId" />
+    <result column="DC_P_ID" jdbcType="INTEGER" property="dcPId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MERGER_NAME" jdbcType="VARCHAR" property="mergerName" />
+    <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+    <result column="MERGER_SHORT_NAME" jdbcType="VARCHAR" property="mergerShortName" />
+    <result column="LEVEL_TYPE" jdbcType="INTEGER" property="levelType" />
+    <result column="CITY_CODE" jdbcType="DECIMAL" property="cityCode" />
+    <result column="ZIP_CODE" jdbcType="DECIMAL" property="zipCode" />
+    <result column="PINYIN" jdbcType="VARCHAR" property="pinyin" />
+    <result column="JIANPIN" jdbcType="VARCHAR" property="jianpin" />
+    <result column="FIRST_CHAR" jdbcType="VARCHAR" property="firstChar" />
+    <result column="LNG" jdbcType="DECIMAL" property="lng" />
+    <result column="LAT" jdbcType="DECIMAL" property="lat" />
+    <result column="ENABLED" jdbcType="INTEGER" property="enabled" />
+    <result column="VERSION" jdbcType="INTEGER" property="version" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_DT" jdbcType="VARCHAR" property="createDt" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_DT" jdbcType="VARCHAR" property="updateDt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    ID, SYS_ACCOUNT, DC_ID, DC_P_ID, NAME, MERGER_NAME, SHORT_NAME, MERGER_SHORT_NAME, 
+    LEVEL_TYPE, CITY_CODE, ZIP_CODE, PINYIN, JIANPIN, FIRST_CHAR, LNG, LAT, ENABLED, 
+    VERSION, STATUS, REMARK, MEMO, CREATE_BY, CREATE_DT, UPDATE_BY, UPDATE_DT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from sys_district
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+    delete from sys_district
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cdkj.model.system.pojo.SysDistrict">
+
+    insert into sys_district (ID, SYS_ACCOUNT, DC_ID, 
+      DC_P_ID, NAME, MERGER_NAME, 
+      SHORT_NAME, MERGER_SHORT_NAME, LEVEL_TYPE, 
+      CITY_CODE, ZIP_CODE, PINYIN, 
+      JIANPIN, FIRST_CHAR, LNG, 
+      LAT, ENABLED, VERSION, 
+      STATUS, REMARK, MEMO, 
+      CREATE_BY, CREATE_DT, UPDATE_BY, 
+      UPDATE_DT)
+    values (#{id,jdbcType=VARCHAR}, #{sysAccount,jdbcType=VARCHAR}, #{dcId,jdbcType=INTEGER}, 
+      #{dcPId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mergerName,jdbcType=VARCHAR}, 
+      #{shortName,jdbcType=VARCHAR}, #{mergerShortName,jdbcType=VARCHAR}, #{levelType,jdbcType=INTEGER}, 
+      #{cityCode,jdbcType=DECIMAL}, #{zipCode,jdbcType=DECIMAL}, #{pinyin,jdbcType=VARCHAR}, 
+      #{jianpin,jdbcType=VARCHAR}, #{firstChar,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, 
+      #{lat,jdbcType=DECIMAL}, #{enabled,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDt,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdkj.model.system.pojo.SysDistrict">
+
+    insert into sys_district
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sysAccount != null">
+        SYS_ACCOUNT,
+      </if>
+      <if test="dcId != null">
+        DC_ID,
+      </if>
+      <if test="dcPId != null">
+        DC_P_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="mergerName != null">
+        MERGER_NAME,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+      <if test="mergerShortName != null">
+        MERGER_SHORT_NAME,
+      </if>
+      <if test="levelType != null">
+        LEVEL_TYPE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE,
+      </if>
+      <if test="pinyin != null">
+        PINYIN,
+      </if>
+      <if test="jianpin != null">
+        JIANPIN,
+      </if>
+      <if test="firstChar != null">
+        FIRST_CHAR,
+      </if>
+      <if test="lng != null">
+        LNG,
+      </if>
+      <if test="lat != null">
+        LAT,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createDt != null">
+        CREATE_DT,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDt != null">
+        UPDATE_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAccount != null">
+        #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="dcId != null">
+        #{dcId,jdbcType=INTEGER},
+      </if>
+      <if test="dcPId != null">
+        #{dcPId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mergerName != null">
+        #{mergerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="mergerShortName != null">
+        #{mergerShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelType != null">
+        #{levelType,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=DECIMAL},
+      </if>
+      <if test="pinyin != null">
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="jianpin != null">
+        #{jianpin,jdbcType=VARCHAR},
+      </if>
+      <if test="firstChar != null">
+        #{firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDt != null">
+        #{createDt,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDt != null">
+        #{updateDt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysDistrict">
+
+    update sys_district
+    <set>
+      <if test="sysAccount != null">
+        SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="dcId != null">
+        DC_ID = #{dcId,jdbcType=INTEGER},
+      </if>
+      <if test="dcPId != null">
+        DC_P_ID = #{dcPId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mergerName != null">
+        MERGER_NAME = #{mergerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="mergerShortName != null">
+        MERGER_SHORT_NAME = #{mergerShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelType != null">
+        LEVEL_TYPE = #{levelType,jdbcType=INTEGER},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE = #{zipCode,jdbcType=DECIMAL},
+      </if>
+      <if test="pinyin != null">
+        PINYIN = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="jianpin != null">
+        JIANPIN = #{jianpin,jdbcType=VARCHAR},
+      </if>
+      <if test="firstChar != null">
+        FIRST_CHAR = #{firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        LNG = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        LAT = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDt != null">
+        CREATE_DT = #{createDt,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDt != null">
+        UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdkj.model.system.pojo.SysDistrict">
+
+    update sys_district
+    set SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      DC_ID = #{dcId,jdbcType=INTEGER},
+      DC_P_ID = #{dcPId,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR},
+      MERGER_NAME = #{mergerName,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      MERGER_SHORT_NAME = #{mergerShortName,jdbcType=VARCHAR},
+      LEVEL_TYPE = #{levelType,jdbcType=INTEGER},
+      CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      ZIP_CODE = #{zipCode,jdbcType=DECIMAL},
+      PINYIN = #{pinyin,jdbcType=VARCHAR},
+      JIANPIN = #{jianpin,jdbcType=VARCHAR},
+      FIRST_CHAR = #{firstChar,jdbcType=VARCHAR},
+      LNG = #{lng,jdbcType=DECIMAL},
+      LAT = #{lat,jdbcType=DECIMAL},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      VERSION = #{version,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DT = #{createDt,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectBySysAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from sys_district
+    where SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR}
+    and ENABLED = 1
+  </select>
+</mapper>

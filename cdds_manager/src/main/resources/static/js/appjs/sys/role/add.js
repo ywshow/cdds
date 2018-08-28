@@ -1,0 +1,86 @@
+//var menuTree;
+var permissionIds;
+$(function () {
+    getMenuTreeData();
+    validateRule();
+});
+$.validator.setDefaults({
+    submitHandler: function () {
+        getAllSelectNodes();
+        save();
+    }
+});
+
+function getAllSelectNodes() {
+    var ref = $('#menuTree').jstree(true);// 获得整个树
+    permissionIds = ref.get_selected(); // 获得所有选中节点的，返回值为数组
+}
+
+function getMenuTreeData() {
+    $.ajax({
+        type: "GET",
+        url: "/sys/permission/tree",
+        success: function (menuTree) {
+            // menuTree = data;
+            loadMenuTree(menuTree);
+        }
+    });
+}
+
+function loadMenuTree(menuTree) {
+    $('#menuTree').jstree({
+        'core': {
+            'data': menuTree
+        },
+        "checkbox": {
+            "three_state": false,
+            //"cascade" : 'down'
+        },
+        "plugins": ["wholerow", "checkbox"]
+    });
+    //$('#menuTree').jstree("open_all");
+}
+
+function save() {
+    $('#permissionIds').val(permissionIds);
+    var role = $('#signupForm').serialize();
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/sys/role/save",
+        data: role,// 你的formid
+        async: false,
+        error: function (request) {
+            alert("Connection error");
+        },
+        success: function (data) {
+            debugger;
+            var result = JSON.parse(data);
+            if (result.resultCode == 1) {
+                parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
+
+            } else {
+                parent.layer.msg("操作失败" + result.resultCode);
+            }
+        }
+    });
+}
+
+function validateRule() {
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules: {
+            roleName: {
+                required: true
+            }
+        },
+        messages: {
+            roleName: {
+                required: icon + "请输入角色名"
+            }
+        }
+    });
+}

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdkj.manager.system.dao.SysPermissionMapper">
+    <resultMap id="BaseResultMap" type="com.cdkj.model.system.pojo.SysPermission">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SYS_ACCOUNT" property="sysAccount" jdbcType="VARCHAR"/>
+        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
+        <result column="PER_NAME" property="perName" jdbcType="VARCHAR"/>
+        <result column="PER_CODE" property="perCode" jdbcType="VARCHAR"/>
+        <result column="PER_DESC" property="perDesc" jdbcType="VARCHAR"/>
+        <result column="PER_URL" property="perUrl" jdbcType="VARCHAR"/>
+        <result column="PER_TYPE" property="perType" jdbcType="VARCHAR"/>
+        <result column="PER_ICON" property="perIcon" jdbcType="VARCHAR"/>
+        <result column="SORT_NUMBER" property="sortNumber" jdbcType="INTEGER"/>
+        <result column="ENABLED" property="enabled" jdbcType="INTEGER"/>
+        <result column="VERSION" property="version" jdbcType="INTEGER"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="VARCHAR"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, SYS_ACCOUNT, PARENT_ID, PER_NAME, PER_CODE, PER_DESC, PER_URL, PER_TYPE, PER_ICON, 
+    SORT_NUMBER, ENABLED, VERSION, STATUS, REMARK, MEMO, CREATE_BY, CREATE_DT, UPDATE_BY, 
+    UPDATE_DT
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_permission
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.cdkj.model.system.pojo.SysPermission">
+    insert into sys_permission (ID, SYS_ACCOUNT, PARENT_ID, 
+      PER_NAME, PER_CODE, PER_DESC, 
+      PER_URL, PER_TYPE, PER_ICON, 
+      SORT_NUMBER, ENABLED, VERSION, 
+      STATUS, REMARK, MEMO, 
+      CREATE_BY, CREATE_DT, UPDATE_BY, 
+      UPDATE_DT)
+    values (#{id,jdbcType=VARCHAR}, #{sysAccount,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{perName,jdbcType=VARCHAR}, #{perCode,jdbcType=VARCHAR}, #{perDesc,jdbcType=VARCHAR}, 
+      #{perUrl,jdbcType=VARCHAR}, #{perType,jdbcType=VARCHAR}, #{perIcon,jdbcType=VARCHAR}, 
+      #{sortNumber,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDt,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDt,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.cdkj.model.system.pojo.SysPermission">
+        insert into sys_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT,
+            </if>
+            <if test="parentId != null">
+                PARENT_ID,
+            </if>
+            <if test="perName != null">
+                PER_NAME,
+            </if>
+            <if test="perCode != null">
+                PER_CODE,
+            </if>
+            <if test="perDesc != null">
+                PER_DESC,
+            </if>
+            <if test="perUrl != null">
+                PER_URL,
+            </if>
+            <if test="perType != null">
+                PER_TYPE,
+            </if>
+            <if test="perIcon != null">
+                PER_ICON,
+            </if>
+            <if test="sortNumber != null">
+                SORT_NUMBER,
+            </if>
+            <if test="enabled != null">
+                ENABLED,
+            </if>
+            <if test="version != null">
+                VERSION,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="createBy != null">
+                CREATE_BY,
+            </if>
+            <if test="createDt != null">
+                CREATE_DT,
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY,
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sysAccount != null">
+                #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="perName != null">
+                #{perName,jdbcType=VARCHAR},
+            </if>
+            <if test="perCode != null">
+                #{perCode,jdbcType=VARCHAR},
+            </if>
+            <if test="perDesc != null">
+                #{perDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="perUrl != null">
+                #{perUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="perType != null">
+                #{perType,jdbcType=VARCHAR},
+            </if>
+            <if test="perIcon != null">
+                #{perIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNumber != null">
+                #{sortNumber,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.system.pojo.SysPermission">
+        update sys_permission
+        <set>
+            <if test="sysAccount != null">
+                SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                PARENT_ID = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="perName != null">
+                PER_NAME = #{perName,jdbcType=VARCHAR},
+            </if>
+            <if test="perCode != null">
+                PER_CODE = #{perCode,jdbcType=VARCHAR},
+            </if>
+            <if test="perDesc != null">
+                PER_DESC = #{perDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="perUrl != null">
+                PER_URL = #{perUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="perType != null">
+                PER_TYPE = #{perType,jdbcType=VARCHAR},
+            </if>
+            <if test="perIcon != null">
+                PER_ICON = #{perIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNumber != null">
+                SORT_NUMBER = #{sortNumber,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                ENABLED = #{enabled,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cdkj.model.system.pojo.SysPermission">
+    update sys_permission
+    set SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      PER_NAME = #{perName,jdbcType=VARCHAR},
+      PER_CODE = #{perCode,jdbcType=VARCHAR},
+      PER_DESC = #{perDesc,jdbcType=VARCHAR},
+      PER_URL = #{perUrl,jdbcType=VARCHAR},
+      PER_TYPE = #{perType,jdbcType=VARCHAR},
+      PER_ICON = #{perIcon,jdbcType=VARCHAR},
+      SORT_NUMBER = #{sortNumber,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      VERSION = #{version,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DT = #{createDt,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="listUserPerms" resultType="java.lang.String">
+    SELECT DISTINCT m.PER_CODE
+    FROM sys_permission m LEFT JOIN
+      sys_role_permission rm ON m.ID = rm.PERMISSION_ID
+      LEFT JOIN sys_user_role ur
+        ON rm.ROLE_ID = ur.ROLE_ID
+    WHERE ur.USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+    <select id="listUserPermission" resultMap="BaseResultMap">
+        SELECT
+         m.*
+        FROM sys_permission m LEFT JOIN
+        sys_role_permission rm ON m.ID = rm.PERMISSION_ID
+        LEFT JOIN sys_user_role ur
+        ON rm.ROLE_ID = ur.ROLE_ID
+        WHERE ur.USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listAllPerms" resultType="java.lang.String">
+        SELECT DISTINCT m.PER_CODE
+        FROM sys_permission m
+        where m.enabled=1
+    </select>
+    <select id="listAllPermission" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_permission m
+        where m.enabled=1
+    </select>
+
+    <select id="listByPrimaryKeySelective" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_permission m
+        where 1=1
+        <if test="id != null">
+            and ID = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="sysAccount != null">
+            and SYSACCOUNT= #{sysAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and PARENTID= #{parentId,jdbcType=VARCHAR}
+        </if>
+        <if test="perName != null">
+            and PERNAME= #{perName,jdbcType=VARCHAR}
+        </if>
+        <if test="perCode != null">
+            and PERCODE = #{perCode,jdbcType=VARCHAR}
+        </if>
+        <if test="perDesc != null">
+            and PERDESC = #{perDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="perUrl != null">
+            and PERURL = #{perUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="perType != null">
+            and PERTYPE = #{perType,jdbcType=VARCHAR}
+        </if>
+        <if test="perIcon != null">
+            and PERICON = #{perIcon,jdbcType=VARCHAR}
+        </if>
+        <if test="enabled != null">
+            and ENABLED= #{enabled,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            and STATUS = #{status,jdbcType=INTEGER}
+        </if>
+        order by SORT_NUMBER
+    </select>
+    <select id="listRoleIdPermission" resultType="java.lang.String">
+          SELECT m.ID
+        FROM sys_permission m LEFT JOIN
+          sys_role_permission rm ON m.ID = rm.PERMISSION_ID
+        WHERE rm.ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

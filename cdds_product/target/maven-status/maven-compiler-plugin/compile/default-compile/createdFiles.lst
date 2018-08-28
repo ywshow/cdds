@@ -1,0 +1,6 @@
+com\cdkj\config\CorsConfiguration.class
+com\cdkj\product\service\api\ProductService.class
+com\cdkj\CddsProductApplication.class
+com\cdkj\product\dao\ProductMapper.class
+com\cdkj\product\controller\ProductController.class
+com\cdkj\product\service\impl\ProductServiceImpl.class

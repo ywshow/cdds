@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdkj.order.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.cdkj.model.order.pojo.Order" >
+    <id column="DEPTNO" property="deptno" jdbcType="DECIMAL" />
+    <result column="DNAME" property="dname" jdbcType="VARCHAR" />
+    <result column="LOC" property="loc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPTNO, DNAME, LOC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from TEST_ORDER
+    where DEPTNO = #{deptno,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from TEST_ORDER
+    where DEPTNO = #{deptno,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.cdkj.model.order.pojo.Order" >
+    insert into TEST_ORDER (DEPTNO, DNAME, LOC
+      )
+    values (#{deptno,jdbcType=DECIMAL}, #{dname,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdkj.model.order.pojo.Order" >
+    insert into TEST_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptno != null" >
+        DEPTNO,
+      </if>
+      <if test="dname != null" >
+        DNAME,
+      </if>
+      <if test="loc != null" >
+        LOC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptno != null" >
+        #{deptno,jdbcType=DECIMAL},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.order.pojo.Order" >
+    update TEST_ORDER
+    <set >
+      <if test="dname != null" >
+        DNAME = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        LOC = #{loc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEPTNO = #{deptno,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdkj.model.order.pojo.Order" >
+    update TEST_ORDER
+    set DNAME = #{dname,jdbcType=VARCHAR},
+      LOC = #{loc,jdbcType=VARCHAR}
+    where DEPTNO = #{deptno,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectBySysAccount"  parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TEST_ORDER
+    WHERE DNAME=#{sysAccount,jdbcType=VARCHAR}
+  </select>
+</mapper>

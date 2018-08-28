@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdkj.product.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.cdkj.model.product.pojo.Product" >
+    <id column="NAME" property="name" jdbcType="DECIMAL" />
+    <result column="SYS_ACCOUNT" property="sysAccount" jdbcType="VARCHAR" />
+    <result column="LOC" property="loc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NAME, SYS_ACCOUNT, LOC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from TEST_PRODUCT
+    where NAME = #{name,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from TEST_PRODUCT
+    where NAME = #{name,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.cdkj.model.product.pojo.Product" >
+    insert into TEST_PRODUCT (NAME, SYS_ACCOUNT, LOC
+      )
+    values (#{name,jdbcType=DECIMAL}, #{sysAccount,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdkj.model.product.pojo.Product" >
+    insert into TEST_PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sysAccount != null" >
+        SYS_ACCOUNT,
+      </if>
+      <if test="loc != null" >
+        LOC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=DECIMAL},
+      </if>
+      <if test="sysAccount != null" >
+        #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdkj.model.product.pojo.Product" >
+    update TEST_PRODUCT
+    <set >
+      <if test="sysAccount != null" >
+        SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        LOC = #{loc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NAME = #{name,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdkj.model.product.pojo.Product" >
+    update TEST_PRODUCT
+    set SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR},
+      LOC = #{loc,jdbcType=VARCHAR}
+    where NAME = #{name,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectBySysAccount" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TEST_PRODUCT
+    WHERE SYS_ACCOUNT = #{sysAccount,jdbcType=VARCHAR}
+  </select>
+</mapper>

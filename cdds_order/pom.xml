@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cdds</artifactId>
+        <groupId>com.cdkj</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cdds_order</artifactId>
+
+    <packaging>jar</packaging>
+    <description>cdds_order 集中管理包</description>
+    <version>1.0.0</version>
+    <name>cdds_order</name>
+    <properties>
+        <spring-cloud.version>Dalston.SR4</spring-cloud.version>
+        <pojo.version>1.0.0</pojo.version>
+        <common.util.version>1.0.0</common.util.version>
+        <cdds.feign.version>1.0.0</cdds.feign.version>
+        <cdds.config.version>1.0.0</cdds.config.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.cdkj</groupId>
+            <artifactId>cdds_pojo</artifactId>
+            <version>${pojo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cdkj</groupId>
+            <artifactId>common_util</artifactId>
+            <version>${common.util.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cdkj</groupId>
+            <artifactId>cdds_feign</artifactId>
+            <version>${cdds.feign.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cdkj</groupId>
+            <artifactId>cdds_config</artifactId>
+            <version>${cdds.config.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
