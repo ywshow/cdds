@@ -7465,4 +7465,18 @@ body.skin-3 {
     box-sizing:border-box;
 }
 
+.btn i{
+    margin-right: 3px;
+}
 
+.btn-resume {
+    background-color: #b95ab9;
+    border-color: #b95ab9;
+    color: #FFFFFF;
+}
+
+.btn-resume:hover, .btn-resume:focus, .btn-resume:active, .btn-resume.active, .open .dropdown-toggle.btn-resume {
+    background-color: #b95ab9;
+    border-color: #b95ab9;
+    color: #FFFFFF;
+}

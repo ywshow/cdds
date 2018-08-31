@@ -40,7 +40,7 @@ function load() {
                     },
                     {
                         field: 'beanName',
-                        title: '组名'
+                        title: 'bean名称'
                     },
                     {
                         field: 'sysAccount',
@@ -55,7 +55,20 @@ function load() {
                     {
                         field: 'params',
                         title: '参数',
-                        cellStyle: cellStyle
+                        cellStyle: cellStyle,
+                        editable: {
+                        type: 'text',
+                            validate: function (v) {
+                                //校验
+                            }
+                        },
+                        formatter: function (value, row, index) {
+                            var d="-";
+                            if(value!=null && value!=""){
+                                d = value;
+                            }
+                            return d;
+                        }
                     },
                     {
                         field: 'cronExpression',
@@ -71,10 +84,6 @@ function load() {
                         cellStyle: cellStyle
                     },
                     {
-                        field: 'remark',
-                        title: '备注'
-                    },
-                    {
                         field: 'status',
                         title: '状态',
                         formatter: function (value, row, index) {
@@ -83,17 +92,8 @@ function load() {
                         }
                     },
                     {
-                        title: '操作',
-                        field: 'id',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            var ids = new Array();
-                            ids[0] = row.id;
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + ids.toString()
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            return d;
-                        }
+                        field: 'remark',
+                        title: '备注'
                     }]
             });
 }
@@ -152,7 +152,11 @@ function onEditableSave(field, row, oldValue, $el) {
     $.post(url,
         {
             id: row.id,
-            paramValue: row.paramValue
+            params: row.params,
+            methodName:row.methodName,
+            cronExpression:row.cronExpression,
+            status:row.status,
+            beanName:row.beanName
         },
         function (data) {
             if (data.resultCode != 1) {

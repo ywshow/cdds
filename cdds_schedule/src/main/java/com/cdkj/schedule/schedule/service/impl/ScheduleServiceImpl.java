@@ -115,6 +115,7 @@ public class ScheduleServiceImpl extends BaseServiceImpl implements ScheduleServ
     public void save(Schedule schedule) {
         this.initDefaultPrpperty(ShiroUtils.getUserId(), schedule);
         schedule.setStatus(Constant.ScheduleStatus.NORMAL.getValue());
+        schedule.setSysAccount(ShiroUtils.getUser().getSysAccount());
         scheduleMapper.insertSelective(schedule);
     }
 

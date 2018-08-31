@@ -266,7 +266,7 @@ body.body-small .navbar-top-links li:last-child {
     top: 12px;
 }
 
-.arrow,.fa-angle-down {
+.arrow, .fa-angle-down {
     float: right;
     margin-top: 2px;
 }
@@ -274,6 +274,7 @@ body.body-small .navbar-top-links li:last-child {
 .fa.arrow:before {
     content: "\f104";
 }
+
 .fa.fa-angle-down:before {
     content: "\f107";
 }
@@ -7443,26 +7444,42 @@ body.skin-3 {
 .nopadding {
     padding: 0;
 }
-.searchContent{
-    width:750px;
+
+.searchContent {
+    width: 750px;
     overflow: hidden;
     margin-top: 20px;
     display: none;
     text-align: right;
 }
-.row .table-fixed-top{
-    position:fixed;
+
+.row .table-fixed-top {
+    position: fixed;
     right: 0;
     left: 0;
-    border-radius:0;
-    transition-duration:0.5s;
-    z-index:2030;
-    border-width:0 0 1px;
+    border-radius: 0;
+    transition-duration: 0.5s;
+    z-index: 2030;
+    border-width: 0 0 1px;
     top: 0;
-    width:65%;
+    width: 65%;
     margin-left: 26%;
     margin-top: 23px;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
+.btn i {
+    margin-right: 3px;
+}
 
+.btn-resume {
+    background-color: #b95ab9;
+    border-color: #b95ab9;
+    color: #FFFFFF;
+}
+
+.btn-resume:hover, .btn-resume:focus, .btn-resume:active, .btn-resume.active, .open .dropdown-toggle.btn-resume {
+    background-color: #b95ab9;
+    border-color: #b95ab9;
+    color: #FFFFFF;
+}

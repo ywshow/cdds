@@ -50,6 +50,11 @@ public class ScheduleController extends BaseController<Schedule> {
         return prefix + "index";
     }
 
+    @RequestMapping("add")
+    public String add() {
+        return prefix + "add";
+    }
+
     /**
      * 定时任务列表
      */
@@ -73,7 +78,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 定时任务信息
      */
     @RequestMapping("selectById/{jobId}")
-    @RequiresPermissions("sys:schedule:info")
+//    @RequiresPermissions("sys:schedule:info")
     @ResponseBody
     public String selectById(@PathVariable("id") String id) {
         try {
@@ -92,7 +97,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 保存定时任务
      */
     @RequestMapping("save")
-    @RequiresPermissions("sys:schedule:save")
+//    @RequiresPermissions("sys:schedule:save")
     @ResponseBody
     public String save(Schedule schedule) {
         try {
@@ -112,7 +117,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 修改定时任务
      */
     @RequestMapping("update")
-    @RequiresPermissions("sys:schedule:update")
+//    @RequiresPermissions("sys:schedule:update")
     @ResponseBody
     public String update(Schedule schedule) {
         try {
@@ -132,7 +137,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 删除定时任务
      */
     @RequestMapping("delete")
-    @RequiresPermissions("sys:schedule:delete")
+//    @RequiresPermissions("sys:schedule:delete")
     @ResponseBody
     public String delete(String[] jobIds) {
         try {
@@ -151,7 +156,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 立即执行任务
      */
     @RequestMapping("run")
-    @RequiresPermissions("sys:schedule:run")
+//    @RequiresPermissions("sys:schedule:run")
     @ResponseBody
     public String run(String[] jobIds) {
         try {
@@ -170,7 +175,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 暂停定时任务
      */
     @RequestMapping("pause")
-    @RequiresPermissions("sys:schedule:pause")
+//    @RequiresPermissions("sys:schedule:pause")
     @ResponseBody
     public String pause(String[] jobIds) {
         try {
@@ -189,7 +194,7 @@ public class ScheduleController extends BaseController<Schedule> {
      * 恢复定时任务
      */
     @RequestMapping("/resume")
-    @RequiresPermissions("sys:schedule:resume")
+//    @RequiresPermissions("sys:schedule:resume")
     @ResponseBody
     public String resume(String[] jobIds) {
         try {
