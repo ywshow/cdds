@@ -31,9 +31,9 @@ function load() {
                     },
                     {
                         field: 'id', // 列字段名
-                        title: '序号' , // 列标题
-                        width:50,
-                        align:'center',
+                        title: '序号', // 列标题
+                        width: 50,
+                        align: 'center',
                         formatter: function (value, row, index) {
                             return index + 1;
                         }
@@ -57,14 +57,14 @@ function load() {
                         title: '参数',
                         cellStyle: cellStyle,
                         editable: {
-                        type: 'text',
+                            type: 'text',
                             validate: function (v) {
                                 //校验
                             }
                         },
                         formatter: function (value, row, index) {
-                            var d="-";
-                            if(value!=null && value!=""){
+                            var d = "-";
+                            if (value != null && value != "") {
                                 d = value;
                             }
                             return d;
@@ -108,7 +108,6 @@ function reLoad() {
  * @returns {{total, rows}}
  */
 function responseHandler(res) {
-    console.log(JSON.stringify(res));
     if (res.resultCode != 1) {
         layer.msg(res.errorMsg);
     }
@@ -153,10 +152,10 @@ function onEditableSave(field, row, oldValue, $el) {
         {
             id: row.id,
             params: row.params,
-            methodName:row.methodName,
-            cronExpression:row.cronExpression,
-            status:row.status,
-            beanName:row.beanName
+            methodName: row.methodName,
+            cronExpression: row.cronExpression,
+            status: row.status,
+            beanName: row.beanName
         },
         function (data) {
             if (data.resultCode != 1) {
@@ -186,22 +185,12 @@ function cellStyle(value, row, index) {
 }
 
 function batchRemove() {
-    var rows = $('#scheduleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    if (rows.length == 0) {
-        layer.msg("请选择要删除的数据");
-        return;
-    }
-    var ids = new Array();
-    // 遍历所有选择的行数据，取每条数据对应的ID
-    $.each(rows, function (i, row) {
-        ids[i] = row['id'];
-
-    });
-    remove(ids.toString());
+    var ids = getIdsBySelections('#scheduleTable', '删除');
+    remove(ids);
 }
 
 function remove(id) {
-    layer.confirm('确定要删除选中的记录？', {
+    layer.confirm('确定要删除选中的' + checkNum + '条记录？', {
         btn: ['确定', '取消']
     }, function () {
         $.ajax({
@@ -227,12 +216,93 @@ function add() {
     // iframe层
     layer.open({
         type: 2,
-        title: '添加账套字典',
+        title: '添加定时任务',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
         content: prefix + '/add' // iframe的url
     });
+}
+
+/**
+ * 暂停
+ */
+function pause() {
+    var ids = getIdsBySelections('#scheduleTable', '暂停');
+    layer.confirm('确定要暂停选中的' + checkNum + '条记录？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: prefix + "pause",
+            type: "post",
+            data: {
+                'ids': ids
+            },
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (result.resultCode == 1) {
+                    layer.msg("操作成功");
+                    reLoad();
+                } else {
+                    layer.msg(data.errorMsg);
+                }
+            }
+        });
+    })
+}
+
+/**
+ * 恢复
+ */
+function resume() {
+    var ids = getIdsBySelections('#scheduleTable', '恢复');
+    layer.confirm('确定要恢复选中的' + checkNum + '条记录？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: prefix + "resume",
+            type: "post",
+            data: {
+                'ids': ids
+            },
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (result.resultCode == 1) {
+                    layer.msg("操作成功");
+                    reLoad();
+                } else {
+                    layer.msg(data.errorMsg);
+                }
+            }
+        });
+    })
+}
+
+/**
+ * 立即执行
+ */
+function run() {
+    var ids = getIdsBySelections('#scheduleTable', '立即执行');
+    layer.confirm('确定要立即执行选中的' + checkNum + '条记录？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: prefix + "run",
+            type: "post",
+            data: {
+                'ids': ids
+            },
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (result.resultCode == 1) {
+                    layer.msg("操作成功");
+                    reLoad();
+                } else {
+                    layer.msg(data.errorMsg);
+                }
+            }
+        });
+    })
 }
 
 function edit(id) {
@@ -245,7 +315,6 @@ function edit(id) {
         content: prefix + '/edit/' + id // iframe的url
     });
 }
-
 
 
 var searchIndex = null;

@@ -10,14 +10,13 @@ package com.cdkj.schedule.schedule.service.impl;
 
 import com.cdkj.common.base.service.impl.BaseServiceImpl;
 import com.cdkj.common.constant.Constant;
+import com.cdkj.common.exception.CustException;
 import com.cdkj.model.schedule.pojo.Schedule;
 import com.cdkj.schedule.schedule.dao.ScheduleMapper;
 import com.cdkj.schedule.schedule.service.api.ScheduleService;
 import com.cdkj.schedule.util.ScheduleUtils;
 import com.cdkj.schedule.util.ShiroUtils;
-import com.cdkj.util.JsonUtils;
-import com.cdkj.util.PageDTO;
-import com.cdkj.util.ResultInfo;
+import com.cdkj.util.*;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.quartz.CronTrigger;
@@ -27,9 +26,13 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * description: 定时任务管理 <br>
@@ -113,10 +116,34 @@ public class ScheduleServiceImpl extends BaseServiceImpl implements ScheduleServ
      */
     @Override
     public void save(Schedule schedule) {
+        if (StringUtil.isEmpty(schedule.getBeanName())) {
+            throw new CustException("bean名称不能为空");
+        }
+
+        if (StringUtil.isEmpty(schedule.getMethodName())) {
+            throw new CustException("方法名称不能为空");
+        }
+
+        if (StringUtil.isEmpty(schedule.getCronExpression())) {
+            throw new CustException("cron表达式不能为空");
+        }
+        try {
+            /**
+             * 校验bean跟方法名是否存在,未测试重载方法是否影响
+             */
+            Object target = SpringUtils.getBean(schedule.getBeanName());
+            Method[] arr = target.getClass().getDeclaredMethods();
+            Map<String, Object> map = Arrays.stream(arr).collect(Collectors.toMap(Method::getName, Method::getName));
+            if (!map.containsKey(schedule.getMethodName())) {
+                throw new CustException("方法名称不存在");
+            }
+        } catch (Exception e) {
+            throw new CustException("bean名称或方法名称不存在");
+        }
         this.initDefaultPrpperty(ShiroUtils.getUserId(), schedule);
-        schedule.setStatus(Constant.ScheduleStatus.NORMAL.getValue());
+        schedule.setStatus(Constant.ScheduleStatus.PAUSE.getValue());
         schedule.setSysAccount(ShiroUtils.getUser().getSysAccount());
-        scheduleMapper.insertSelective(schedule);
+//        scheduleMapper.insertSelective(schedule);
     }
 
     /**
@@ -127,6 +154,17 @@ public class ScheduleServiceImpl extends BaseServiceImpl implements ScheduleServ
      */
     @Override
     public void update(Schedule schedule) {
+        if (StringUtil.isEmpty(schedule.getBeanName())) {
+            throw new CustException("bean名称不能为空");
+        }
+
+        if (StringUtil.isEmpty(schedule.getMethodName())) {
+            throw new CustException("方法名称不能为空");
+        }
+
+        if (StringUtil.isEmpty(schedule.getCronExpression())) {
+            throw new CustException("cron表达式不能为空");
+        }
         ScheduleUtils.updateScheduleJob(scheduler, schedule);
         scheduleMapper.updateByPrimaryKeySelective(schedule);
     }

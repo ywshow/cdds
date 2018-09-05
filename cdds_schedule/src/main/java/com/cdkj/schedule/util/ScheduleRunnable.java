@@ -41,5 +41,4 @@ public class ScheduleRunnable implements Runnable {
 			throw new CustException("执行定时任务失败", e);
 		}
 	}
-
 }

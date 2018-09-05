@@ -92,3 +92,25 @@ function save(method, url, formId) {
         }
     });
 }
+
+/**
+ * 获取选中数据的id集合
+ * @param tableId 表ID
+ * @param desc 描述
+ */
+var checkNum = 0;
+function getIdsBySelections(tableId, desc) {
+    checkNum = 0;
+    var rows = $(tableId).bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("请选择要" + desc + "的数据");
+        return;
+    }
+    var ids = new Array();
+    // 遍历所有选择的行数据，取每条数据对应的ID
+    $.each(rows, function (i, row) {
+        ids[i] = row['id'];
+    });
+    checkNum = rows.length;
+    return ids.toString();
+}

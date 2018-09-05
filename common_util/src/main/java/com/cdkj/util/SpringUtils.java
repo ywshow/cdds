@@ -56,7 +56,6 @@ public final class SpringUtils implements ApplicationContextAware, DisposableBea
      */
     public static Object getBean(String name) {
         Assert.hasText(name);
-
         return applicationContext.getBean(name);
     }
 

@@ -101,13 +101,12 @@ public class ScheduleController extends BaseController<Schedule> {
     @ResponseBody
     public String save(Schedule schedule) {
         try {
-            verifyForm(schedule);
             scheduleService.save(schedule);
             return JsonUtils.res(schedule);
         } catch (CustException ce) {
             logger.error("ScheduleController.save()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
-        } catch (Exception e) {
+        }catch (Exception e) {
             logger.error("ScheduleController.save()方法系统异常!error={}", e);
             return JsonUtils.resFailed(208, ErrorCode.ERROR_20002, "03", "系统异常");
         }
@@ -121,7 +120,6 @@ public class ScheduleController extends BaseController<Schedule> {
     @ResponseBody
     public String update(Schedule schedule) {
         try {
-            verifyForm(schedule);
             scheduleService.update(schedule);
             return JsonUtils.res(schedule);
         } catch (CustException ce) {
@@ -139,10 +137,10 @@ public class ScheduleController extends BaseController<Schedule> {
     @RequestMapping("delete")
 //    @RequiresPermissions("sys:schedule:delete")
     @ResponseBody
-    public String delete(String[] jobIds) {
+    public String delete(String[] ids) {
         try {
-            scheduleService.deleteBatch(jobIds);
-            return JsonUtils.res(jobIds);
+            scheduleService.deleteBatch(ids);
+            return JsonUtils.res(ids);
         } catch (CustException ce) {
             logger.error("ScheduleController.delete()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
@@ -158,10 +156,10 @@ public class ScheduleController extends BaseController<Schedule> {
     @RequestMapping("run")
 //    @RequiresPermissions("sys:schedule:run")
     @ResponseBody
-    public String run(String[] jobIds) {
+    public String run(String[] ids) {
         try {
-            scheduleService.run(jobIds);
-            return JsonUtils.res(jobIds);
+            scheduleService.run(ids);
+            return JsonUtils.res(ids);
         } catch (CustException ce) {
             logger.error("ScheduleController.run()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
@@ -177,10 +175,10 @@ public class ScheduleController extends BaseController<Schedule> {
     @RequestMapping("pause")
 //    @RequiresPermissions("sys:schedule:pause")
     @ResponseBody
-    public String pause(String[] jobIds) {
+    public String pause(String[] ids) {
         try {
-            scheduleService.pause(jobIds);
-            return JsonUtils.res(jobIds);
+            scheduleService.pause(ids);
+            return JsonUtils.res(ids);
         } catch (CustException ce) {
             logger.error("ScheduleController.pause()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
@@ -196,10 +194,10 @@ public class ScheduleController extends BaseController<Schedule> {
     @RequestMapping("/resume")
 //    @RequiresPermissions("sys:schedule:resume")
     @ResponseBody
-    public String resume(String[] jobIds) {
+    public String resume(String[] ids) {
         try {
-            scheduleService.resume(jobIds);
-            return JsonUtils.res(jobIds);
+//            scheduleService.resume(ids);
+            return JsonUtils.res(ids);
         } catch (CustException ce) {
             logger.error("ScheduleController.resume()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
@@ -209,20 +207,4 @@ public class ScheduleController extends BaseController<Schedule> {
         }
     }
 
-    /**
-     * 验证参数是否正确
-     */
-    private void verifyForm(Schedule schedule) {
-        if (StringUtil.isEmpty(schedule.getBeanName())) {
-            throw new CustException("bean名称不能为空");
-        }
-
-        if (StringUtil.isEmpty(schedule.getMethodName())) {
-            throw new CustException("方法名称不能为空");
-        }
-
-        if (StringUtil.isEmpty(schedule.getCronExpression())) {
-            throw new CustException("cron表达式不能为空");
-        }
-    }
 }
