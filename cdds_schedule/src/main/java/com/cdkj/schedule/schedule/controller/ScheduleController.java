@@ -196,7 +196,7 @@ public class ScheduleController extends BaseController<Schedule> {
     @ResponseBody
     public String resume(String[] ids) {
         try {
-//            scheduleService.resume(ids);
+            scheduleService.resume(ids);
             return JsonUtils.res(ids);
         } catch (CustException ce) {
             logger.error("ScheduleController.resume()方法异常!error={}", ce);

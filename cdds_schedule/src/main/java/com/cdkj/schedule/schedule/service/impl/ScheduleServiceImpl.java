@@ -143,7 +143,7 @@ public class ScheduleServiceImpl extends BaseServiceImpl implements ScheduleServ
         this.initDefaultPrpperty(ShiroUtils.getUserId(), schedule);
         schedule.setStatus(Constant.ScheduleStatus.PAUSE.getValue());
         schedule.setSysAccount(ShiroUtils.getUser().getSysAccount());
-//        scheduleMapper.insertSelective(schedule);
+        scheduleMapper.insertSelective(schedule);
     }
 
     /**
@@ -191,8 +191,13 @@ public class ScheduleServiceImpl extends BaseServiceImpl implements ScheduleServ
      * @return int
      */
     @Override
-    public int updateBatch(String[] jobIds, int status) {
-        return 0;
+    public int updateBatch(String[] jobIds, Short status) {
+        for (String id : jobIds) {
+            Schedule schedule = scheduleMapper.selectByPrimaryKey(id);
+            schedule.setStatus(status);
+            scheduleMapper.updateByPrimaryKeySelective(schedule);
+        }
+        return jobIds.length;
     }
 
     /**

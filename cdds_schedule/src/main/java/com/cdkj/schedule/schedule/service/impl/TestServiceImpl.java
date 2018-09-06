@@ -9,7 +9,10 @@
 package com.cdkj.schedule.schedule.service.impl;
 
 
+import com.cdkj.common.base.service.impl.BaseServiceImpl;
+import com.cdkj.model.schedule.pojo.Schedule;
 import com.cdkj.schedule.schedule.service.api.TestService;
+import com.cdkj.util.JsonUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,9 +24,20 @@ import org.springframework.stereotype.Service;
  * @since JDK 1.8
  */
 @Service
-public class TestServiceImpl implements TestService {
+public class TestServiceImpl extends BaseServiceImpl<Schedule,String> implements TestService {
     @Override
     public void test() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    }
+
+    @Override
+    public int save(Schedule schedule) {
+        logger.error("000000000000000000000000000000000000000000"+ JsonUtils.res(schedule));
+        return 0;
+    }
+
+    @Override
+    public void info() {
+        logger.error("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
     }
 }

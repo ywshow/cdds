@@ -31,19 +31,29 @@ public class TestController extends BaseController {
 
     @Resource
     private TestService testService;
-    public void test(){
+
+    public void test() {
         testService.test();
     }
 
-    public String save(Schedule schedule) {
+    public void info() {
+        testService.info();
+    }
+
+    public String save(String json) {
         try {
-            return JsonUtils.res(schedule);
+            testService.save(JsonUtils.toObject("{"+json+"}", Schedule.class));
+            return JsonUtils.res("");
         } catch (CustException ce) {
             logger.error("ScheduleController.save()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.error("ScheduleController.save()方法系统异常!error={}", e);
             return JsonUtils.resFailed(208, ErrorCode.ERROR_20002, "03", "系统异常");
         }
+    }
+
+    public void tmp(){
+        System.out.println("呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜");
     }
 }

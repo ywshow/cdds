@@ -76,7 +76,7 @@ public interface ScheduleService extends BaseService {
      * @param status 状态
      * @return int
      */
-    int updateBatch(String[] jobIds, int status);
+    int updateBatch(String[] jobIds, Short status);
 
     /**
      * description: 立即执行 <br>

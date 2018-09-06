@@ -8,6 +8,8 @@
  */
 package com.cdkj.schedule.schedule.service.api;
 
+import com.cdkj.model.schedule.pojo.Schedule;
+
 /**
  * description: //TODO <br>
  * date: 2018/9/5 17:03
@@ -19,4 +21,8 @@ package com.cdkj.schedule.schedule.service.api;
 public interface TestService {
 
     void test();
+
+    int save(Schedule schedule);
+
+    void info();
 }
