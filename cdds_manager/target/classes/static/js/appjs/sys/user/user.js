@@ -6,6 +6,13 @@ $(function () {
     var deptId = '';
     getTreeData();
     load(deptId);
+    validateRule();
+});
+
+$.validator.setDefaults({
+    submitHandler: function () {
+        submitBase();
+    }
 });
 
 function load(deptId) {
@@ -108,17 +115,6 @@ function load(deptId) {
                         }
                     }]
             });
-}
-
-function reLoad() {
-    var opt = {
-        silent: true,
-        query: {
-            deptId: $('#deptId').val(),
-            nickName: $('#searchName').val()
-        }
-    };
-    $('#exampleTable').bootstrapTable('refresh', opt);
 }
 
 function add() {
@@ -237,28 +233,147 @@ function getTreeData() {
 
 function loadTree(zTreeNodes) {
     var setting = {
+        edit: {
+            enable: true,
+            editNameSelectAll: true,
+            showRemoveBtn: setNodebtn,
+            removeTitle: "删除节点",
+            showRenameBtn: setNodebtn
+        },
         callback: {
             beforeExpand: zTreeBeforeExpand,
-            beforeClick: zTreeBeforeClick
+            beforeClick: zTreeBeforeClick,
+            onRename: zTreeOnRename,
+            beforeRemove: zTreeBeforeRemove
+        },
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom
         }
     };
     zTreeObj = $.fn.zTree.init($("#ztree"), setting, zTreeNodes);
 }
 
+/**
+ * 是否显示编辑，删除按钮
+ * @param treeId
+ * @param treeNode
+ * @returns {boolean}
+ */
+function setNodebtn(treeId, treeNode) {
+    if (treeNode.id == parentTreeId) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * 编辑节点
+ * @param event
+ * @param treeId
+ * @param treeNode
+ * @param isCancel
+ */
+function zTreeOnRename(event, treeId, treeNode, isCancel) {
+    console.log(JSON.stringify(treeNode));
+    $.post(prefixDept + "save", {
+        id: treeNode.id,
+        deptName: treeNode.name
+    }, function (data) {
+        if (data.resultCode != 1) {
+            layer.msg(data.errorMsg);
+        } else {
+            layer.msg("修改成功");
+        }
+    }, "json")
+}
+
+/**
+ * 删除节点
+ * @param treeId
+ * @param treeNode
+ */
+function zTreeBeforeRemove(treeId, treeNode) {
+    var isdel = false;
+    layer.confirm('确定要删除该节点？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.post(prefixDept + "remove", {
+            id: treeNode.id
+        }, function (data) {
+            if (data.resultCode != 1) {
+                layer.msg(data.errorMsg);
+                isdel = false;
+            } else {
+                layer.msg("删除成功");
+                isdel = true;
+                zTreeObj.removeNode(treeNode);
+            }
+        }, "json");
+    }, function (index) {
+        layer.close(index);
+        isdel = false;
+    });
+    return isdel;
+}
+
+
+/**
+ * 新增节点按钮
+ * @param treeId
+ * @param treeNode
+ */
+function addHoverDom(treeId, treeNode) {
+    var aObj = $("#" + treeNode.tId + "_a");
+    if ($("#diyBtn_" + treeNode.id).length > 0) return;
+    var editStr = "<span id='diyBtn_space_" + treeNode.id + "' title='新增节点' class='button add'></span>"
+        + "<button type='button' class='diyBtn1' id='diyBtn_" + treeNode.id
+        + "' title='新增节点' onfocus='this.blur();'></button>";
+    aObj.append(editStr);
+    var btn = $("#diyBtn_space_" + treeNode.id);
+    if (btn) btn.bind("click", function () {
+        openAddBase(treeNode);
+    });
+}
+
+/**
+ * 新增树节点
+ *
+ */
+var addLayerIndex;
+
+function openAddBase(treeNode) {
+    addLayerIndex = layer.open({
+        type: 1,
+        title: '新增节点',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['500px', '390px'],
+        content: $("#userTreeAdd")
+    });
+    $("#parentId").val(treeNode.id);
+}
+
+function removeHoverDom(treeId, treeNode) {
+    $("#diyBtn_" + treeNode.id).unbind().remove();
+    $("#diyBtn_space_" + treeNode.id).unbind().remove();
+
+}
+
 function zTreeBeforeClick(treeId, treeNode, clickFlag) {
-    console.log(treeNode.id);
     $('#deptId').val(treeNode.id);
-    reLoad(treeNode.id);
+    reLoad();
     return true;
 };
 
 
-function reLoad(deptId) {
+function reLoad() {
     var opt = {
         silent: true,
         query: {
             nickName: $('#searchName').val(),
-            deptId: deptId
+            deptId: $('#deptId').val()
         }
     };
     $('#exampleTable').bootstrapTable('refresh', opt);
@@ -272,7 +387,7 @@ function zTreeBeforeExpand(treeId, treeNode) {
         success: function (tree) {
             if (tree.resultCode == 1) {
                 zTreeObj.removeChildNodes(treeNode);
-                zTreeObj.addNodes(treeNode,tree.result);
+                zTreeObj.addNodes(treeNode, tree.result);
             } else {
                 layer.msg(tree.errorMsg);
             }
@@ -280,3 +395,77 @@ function zTreeBeforeExpand(treeId, treeNode) {
     });
     return true;
 };
+
+/**
+ * 新增节点
+ */
+function submitBase() {
+    var param = $('#userTreeAddForm').serialize();
+    console.log(JSON.stringify(param));
+    var url = prefixDept + 'insertTree';
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: url,
+        data: param,
+        async: false,
+        dataType: 'json',
+        error: function (request) {
+            alert("Connection error");
+        },
+        success: function (data) {
+            if (data.resultCode == 1) {
+                var newNode = data.result[0].children[0];
+                newNode.isParent = true;
+                console.log(JSON.stringify($("#deptId").val()));
+                var node = zTreeObj.getNodeByParam("id", $('#deptId').val(), null);
+                console.log(JSON.stringify(node));
+                zTreeObj.addNodes(node, 0, newNode);
+                layer.msg("操作成功");
+                layer.close(addLayerIndex);
+                reLoad();
+                $("#userTreeAddForm input").each(function(){
+                    $(this).val("");
+                })
+            } else {
+                layer.msg(data.errorMsg);
+            }
+        }
+    });
+}
+
+function validateRule() {
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#userTreeAddForm").validate({
+        rules: {
+            deptName: {
+                required: true
+            },
+            deptCode: {
+                required: true
+            },
+            sortNumber: {
+                required: true,
+                digits:true
+            },
+            sysAccount: {
+                required: true
+            }
+        },
+        messages: {
+            deptName: {
+                required: icon + "部门名称不能为空"
+            },
+            deptCode: {
+                required: icon + "部门代码不能为空"
+            },
+            sortNumber: {
+                required: icon + "排序号不能为空",
+                digits:icon + "请输入整数"
+            },
+            sysAccount: {
+                required: icon + "账套号不能为空"
+            }
+        }
+    });
+}

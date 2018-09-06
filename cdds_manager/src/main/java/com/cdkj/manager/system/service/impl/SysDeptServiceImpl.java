@@ -42,7 +42,10 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDept, String> impleme
     @Override
     public int merge(SysDept sysDept) {
         if (StringUtils.isEmpty(sysDept.getId())) {
-            this.initDefaultPrpperty(ShiroUtils.getUserId(),sysDept);
+            this.initDefaultPrpperty(ShiroUtils.getUserId(), sysDept);
+            if (StringUtil.isEmpty(sysDept.getSysAccount())) {
+                sysDept.setSysAccount(ShiroUtils.getUser().getSysAccount());
+            }
             return sysDeptMapper.insertSelective(sysDept);
         } else {
             sysDept.setUpdateDt(DateUtil.getNow());
@@ -62,8 +65,8 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDept, String> impleme
         TreeNodeInit init = new TreeNodeInit();
         String[] property = {"deptName"};
         //map只是为设置sysdepts 列表为父节点
-        Map<String,Object> map = new HashMap<>(1);
-        map.put("000","000");
+        Map<String, Object> map = new HashMap<>(1);
+        map.put("000", "000");
         return init.multipleTree(sysdepts, map, property, null);
     }
 
@@ -80,15 +83,15 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDept, String> impleme
      */
     @Override
     public List<TreeNode> selectChildrenTree(String parentId) {
-        if(StringUtil.isEmpty(parentId)){
+        if (StringUtil.isEmpty(parentId)) {
             throw new CustException("父节点为空");
         }
         List<SysDept> list = sysDeptMapper.selectByParentId(parentId);
         TreeNodeInit init = new TreeNodeInit();
         String[] property = {"deptName"};
         //map只是为设置sysdepts 列表为父节点
-        Map<String,Object> map = new HashMap<>(1);
-        map.put("000","000");
+        Map<String, Object> map = new HashMap<>(1);
+        map.put("000", "000");
         return init.initChildTreeWithNotParent(list, property, parentId);
     }
 

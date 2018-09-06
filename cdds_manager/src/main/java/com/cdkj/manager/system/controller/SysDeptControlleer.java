@@ -16,12 +16,14 @@ import com.cdkj.model.system.pojo.SysDept;
 import com.cdkj.util.JsonUtils;
 import com.cdkj.util.Tree;
 import com.cdkj.ztree.TreeNode;
+import com.cdkj.ztree.TreeNodeInit;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,6 +97,26 @@ public class SysDeptControlleer extends BaseController {
     public String save(SysDept sysDept) {
         try {
             return JsonUtils.res(sysDeptService.merge(sysDept));
+        } catch (CustException ce) {
+            logger.error("DeptControlleer.save()方法异常!error={}", ce);
+            return JsonUtils.resFailed(ce.getMsg());
+        } catch (Exception e) {
+            logger.error("DeptControlleer.save()方法系统异常!error={}", e);
+            return JsonUtils.resFailed(101, 20002, "02", "系统异常");
+        }
+    }
+
+    @RequiresPermissions("sys:dept:insert")
+    @PostMapping("/insertTree")
+    @ResponseBody
+    public String insertTree(SysDept sysDept) {
+        try {
+            sysDeptService.merge(sysDept);
+            TreeNodeInit init = new TreeNodeInit();
+            List<SysDept> list = new ArrayList<>();
+            list.add(sysDept);
+            String[] property = {"deptName"};
+            return JsonUtils.res(init.multipleTree(list, null, property, null));
         } catch (CustException ce) {
             logger.error("DeptControlleer.save()方法异常!error={}", ce);
             return JsonUtils.resFailed(ce.getMsg());
