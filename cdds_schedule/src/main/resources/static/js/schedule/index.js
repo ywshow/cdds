@@ -108,7 +108,6 @@ function reLoad() {
  * @returns {{total, rows}}
  */
 function responseHandler(res) {
-    console.log(JSON.stringify(res));
     if (res.resultCode != 1) {
         layer.msg(res.errorMsg);
     }
@@ -240,7 +239,6 @@ function pause() {
                 'ids': ids
             },
             success: function (data) {
-                console.log(JSON.stringify(data));
                 var result = JSON.parse(data);
                 if (result.resultCode == 1) {
                     layer.msg("操作成功");

@@ -16,7 +16,6 @@ $.validator.setDefaults({
 });
 
 function load(deptId) {
-    // console.log("数据加载");
     $('#exampleTable')
         .bootstrapTable(
             {
@@ -276,7 +275,6 @@ function setNodebtn(treeId, treeNode) {
  * @param isCancel
  */
 function zTreeOnRename(event, treeId, treeNode, isCancel) {
-    console.log(JSON.stringify(treeNode));
     $.post(prefixDept + "save", {
         id: treeNode.id,
         deptName: treeNode.name
@@ -401,7 +399,6 @@ function zTreeBeforeExpand(treeId, treeNode) {
  */
 function submitBase() {
     var param = $('#userTreeAddForm').serialize();
-    console.log(JSON.stringify(param));
     var url = prefixDept + 'insertTree';
     $.ajax({
         cache: true,
@@ -417,9 +414,7 @@ function submitBase() {
             if (data.resultCode == 1) {
                 var newNode = data.result[0].children[0];
                 newNode.isParent = true;
-                console.log(JSON.stringify($("#deptId").val()));
                 var node = zTreeObj.getNodeByParam("id", $('#deptId').val(), null);
-                console.log(JSON.stringify(node));
                 zTreeObj.addNodes(node, 0, newNode);
                 layer.msg("操作成功");
                 layer.close(addLayerIndex);

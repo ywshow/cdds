@@ -56,4 +56,8 @@ public class TestController extends BaseController {
     public void tmp(){
         System.out.println("呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜");
     }
+
+    public void sss(){
+        System.out.println("lllllllllllllllllllllllllllllllllll");
+    }
 }
