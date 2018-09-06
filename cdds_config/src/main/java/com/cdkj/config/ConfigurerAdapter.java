@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * description: 公共配置，跨域问题处理，日志方法格式设置 <br>
+ * description: 公共配置，跨域问题处理<br>
  * date: 2018/3/25 下午2:45
  *
  * @author bovine
